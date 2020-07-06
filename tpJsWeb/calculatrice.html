@@ -2,11 +2,11 @@
 <head>
     <title>calculatrice</title>
 	<script src="./js/calculatrice.js" ></script>
-	<!-- <link rel="stylesheet" href="./css/styles.css" type="text/css" > -->
+	<link rel="stylesheet" href="./css/styles.css" type="text/css" > 
 </head>
 <body id="main" >
    
-   <h1>calculatrice</h1>
+   <h1 id="titre1" >calculatrice</h1>
    x: <input id="x" type="text" /> <br/>
     y=f(x): <input id="fx" type="text" /> (ex: 3*x) <br/>
 	<input type="button" value="calculer_fx" 
@@ -19,7 +19,8 @@
    <input type="button" onclick="calculerOperation('*')"  value="a*b"></input>
    <input type="button" onclick="calculerOperation('-')"  value="a-b"></input> 
    <input type="button" onclick="calculerOperation('/')"  value="a/b"></input><br/>
-   res = <span  id="spanRes"></span> <br/>
+   <div  id="spanRes">res</div> 
+   *****<br/>
 <script>
   var v1;
   console.log (typeof v1); 

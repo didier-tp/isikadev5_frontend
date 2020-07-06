@@ -30,6 +30,15 @@ function calculerOperation(pOperation){
 		  
 		  //document.getElementById("spanRes").innerHTML = res;
           zoneRes.innerHTML = res;
+		  document.getElementById("spanRes").style.color='red';
+		  //document.getElementById("spanRes").style.visibility='hidden';
+		  document.getElementById("spanRes").style.display='none';
+		  
+		  var zoneTitre1 = document.getElementById("titre1");
+		  var zs = document.createElement("span");
+		  zs.innerHTML=" javascript";
+		  zs.style.fontStyle='italic';
+		  zoneTitre1.appendChild(zs);
 		}
 		
 function calculer_fx(){
