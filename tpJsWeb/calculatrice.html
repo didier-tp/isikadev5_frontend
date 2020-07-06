@@ -7,12 +7,13 @@
 <body id="main" >
    
    <h1 id="titre1" >calculatrice</h1>
+   
    x: <input id="x" type="text" /> <br/>
     y=f(x): <input id="fx" type="text" /> (ex: 3*x) <br/>
 	<input type="button" value="calculer_fx" 
 	      onclick="calculer_fx()" /> <br/>
     resY = <span  id="spanResY"></span> <br/>
-  
+  <hr/>
    a: <input id="a" type="text" /> <br/>
    b: <input id="b" type="text" /> <br/>
    <input type="button" onclick="calculerOperation('+')"  value="a+b"></input>
@@ -21,6 +22,11 @@
    <input type="button" onclick="calculerOperation('/')"  value="a/b"></input><br/>
    <div  id="spanRes">res</div> 
    *****<br/>
+   <input type="checkbox" onclick="voirOuMontrerHistorique()"
+   id="cbHisto" checked /> voir l'historique <br/>
+   <ul id="ulHistorique" >
+      <!-- <li>2*3=6</li> -->
+   </ul>
 <script>
   var v1;
   console.log (typeof v1); 

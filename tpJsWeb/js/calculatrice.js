@@ -32,13 +32,21 @@ function calculerOperation(pOperation){
           zoneRes.innerHTML = res;
 		  document.getElementById("spanRes").style.color='red';
 		  //document.getElementById("spanRes").style.visibility='hidden';
-		  document.getElementById("spanRes").style.display='none';
+		  document.getElementById("spanRes").style.display='block';//ou 'none'
 		  
+		  /*
 		  var zoneTitre1 = document.getElementById("titre1");
 		  var zs = document.createElement("span");
 		  zs.innerHTML=" javascript";
 		  zs.style.fontStyle='italic';
 		  zoneTitre1.appendChild(zs);
+		  */
+		  var zoneHistorique = document.getElementById("ulHistorique");
+		  var li = document.createElement("li");
+		  li.innerHTML="a="+a+" op="+pOperation + " b="+b+" res="+res ;
+		  li.style.fontStyle='italic';
+		  zoneHistorique.appendChild(li);
+		  
 		}
 		
 function calculer_fx(){
@@ -50,3 +58,13 @@ function calculer_fx(){
   var y = eval(fx);
   zoneResY.innerHTML="<b>"+y+"</b>";
 }	
+
+function voirOuMontrerHistorique(){
+	 var zoneHistorique = document.getElementById("ulHistorique");
+	 var zoneCheckBox = document.getElementById("cbHisto");
+	 if(zoneCheckBox.checked){
+		 zoneHistorique.style.display="block";
+	 }else{
+		 zoneHistorique.style.display="none";
+	 }
+}
