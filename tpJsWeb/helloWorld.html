@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>hello world</title>
+	<script>
+	   function afficher(msg){
+	      //document.write(msg);
+		  //alert(msg);
+		  console.log(msg);
+		  var spanMsg = document.getElementById("spanMsg");
+		  spanMsg.innerHTML=msg;
+	   }
+	</script>
+</head>
+<body>
+   <h1>welcome tpJs</h1>
+   
+   *** message = <span id="spanMsg"></span> ***
+   <p>suite</p>
+   
+   <script>
+     var v1 = "hello world !";
+	 afficher(v1);
+   </script>
+</body>
+</html>
