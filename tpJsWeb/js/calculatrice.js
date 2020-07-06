@@ -9,6 +9,12 @@ window.addEventListener('load', function (){
 	var zoneCheckBox = document.querySelector("#cbHisto");
 	// <input type ='checkbox' onclick="voirOuMontrerHistorique()"
 	zoneCheckBox.addEventListener("click",voirOuMontrerHistorique);
+	
+	var zoneTitre1 = document.querySelector("#titre1");
+	zoneTitre1.addEventListener("mousemove" , function (evt){
+		console.log("souris a bougé sur zone:" + evt.target.id
+		             + "x=" + evt.pageX +  "y=" + evt.pageY );
+	});
 });
 
 var zoneRes;
