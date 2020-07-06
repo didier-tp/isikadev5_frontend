@@ -1,3 +1,15 @@
+/*
+function initAfterLoad(){
+  console.log("chargement de la page");
+}
+window.addEventListener('load', initAfterLoad);
+*/
+window.addEventListener('load', function (){
+	console.log("chargement de la page");
+	var zoneCheckBox = document.querySelector("#cbHisto");
+	// <input type ='checkbox' onclick="voirOuMontrerHistorique()"
+	zoneCheckBox.addEventListener("click",voirOuMontrerHistorique);
+});
 
 var zoneRes;
 
@@ -61,7 +73,8 @@ function calculer_fx(){
 
 function voirOuMontrerHistorique(){
 	 var zoneHistorique = document.getElementById("ulHistorique");
-	 var zoneCheckBox = document.getElementById("cbHisto");
+	 //var zoneCheckBox = document.getElementById("cbHisto");
+	 var zoneCheckBox = document.querySelector("#cbHisto");
 	 if(zoneCheckBox.checked){
 		 zoneHistorique.style.display="block";
 	 }else{
