@@ -31,3 +31,13 @@ function calculerOperation(pOperation){
 		  //document.getElementById("spanRes").innerHTML = res;
           zoneRes.innerHTML = res;
 		}
+		
+function calculer_fx(){
+  var zoneX = document.getElementById("x");
+  var zoneFx = document.getElementById("fx");
+  var zoneResY = document.getElementById("spanResY");
+  var x = zoneX.value; //ex: 4
+  var fx = zoneFx.value; // ex: 3*x
+  var y = eval(fx);
+  zoneResY.innerHTML="<b>"+y+"</b>";
+}	

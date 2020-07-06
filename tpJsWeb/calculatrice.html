@@ -7,6 +7,11 @@
 <body id="main" >
    
    <h1>calculatrice</h1>
+   x: <input id="x" type="text" /> <br/>
+    y=f(x): <input id="fx" type="text" /> (ex: 3*x) <br/>
+	<input type="button" value="calculer_fx" 
+	      onclick="calculer_fx()" /> <br/>
+    resY = <span  id="spanResY"></span> <br/>
   
    a: <input id="a" type="text" /> <br/>
    b: <input id="b" type="text" /> <br/>
@@ -15,7 +20,21 @@
    <input type="button" onclick="calculerOperation('-')"  value="a-b"></input> 
    <input type="button" onclick="calculerOperation('/')"  value="a/b"></input><br/>
    res = <span  id="spanRes"></span> <br/>
-
+<script>
+  var v1;
+  console.log (typeof v1); 
+  console.log(v1);
+  v1='abc';
+  console.log (typeof v1); 
+  v1=56;
+  console.log (typeof v1); 
+  var va="25" ; 
+  var vb=25 ;
+  if(va==vb) console.log("meme valeur");
+  if(va===vb) console.log("meme valeur et meme type");
+    else console.log("différence sur type ou  valeur ");
+  
+</script>
  
 </body>
 </html>
