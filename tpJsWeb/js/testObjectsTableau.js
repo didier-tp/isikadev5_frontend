@@ -27,6 +27,7 @@ window.onload = function () {
 		nouveauTr.appendChild(nouveauTdChange);
 		nouveauTdChange.innerHTML=nouvelleDevise.change;
 		*/
+		
 		//solution 2:
 		var nouveauTr = zoneTabBody.insertRow(-1);
 		var nouveauTdCode = nouveauTr.insertCell(0);
