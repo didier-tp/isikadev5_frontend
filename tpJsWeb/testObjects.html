@@ -8,6 +8,21 @@
    <h1>test Objects</h1>
    
    <script>
+      var tabJours=["lundi" , "mardi" ];
+	  tabJours.push("mercredi");
+	  console.log(tabJours);
+	  //console.log(JSON.stringify(tabJours));
+	  for(var i=0;i<tabJours.length;i++)
+           console.log(tabJours[i]);
+      function Devise(code,nom,change){
+	     //console.log("constructeur Devise, code="+code);
+	     this.code=code;
+		 this.nom=nom;
+		 this.change = change;
+		 this.aff = function() {
+		    console.log(JSON.stringify(this));
+		 }
+	  }
        
        var devise1 = {
 	     code : 'EUR',
@@ -19,10 +34,23 @@
 	  var devise1AsJsonString = JSON.stringify(devise1);
 	  console.log(devise1);
 	  console.log(devise1AsJsonString);
-	  var tab2= new Array();
-	  tab2[0]="abc";
-	  tab3=[];
-	  tab3[0]="xyz";
+	  
+	  var devise2 = new Devise();
+	  var devise3 = new Devise("USD","Dollar" , 1.1);
+	  var devise4 = new Devise("GBP","Livre" , 0.9);
+	  devise2.aff();
+	  devise3.aff();
+	  
+	  var tabDevises = [];
+	  tabDevises[0]=devise1;
+	  tabDevises.push(devise3);
+	  tabDevises.push(devise4);
+	  console.log("nom premire devise=" + tabDevises[0].nom );
+	  console.log(JSON.stringify(tabDevises));
+	  delete tabDevises[1]; //suppression avec trou (null ou undefined)
+	  //tabDevises.splice(1,1); //suppression sans trou
+	  console.log(JSON.stringify(tabDevises));
+	  
    </script>
 </body>
 </html>
