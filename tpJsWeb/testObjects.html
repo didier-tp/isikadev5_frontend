@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>testObjects</title>
+	<link rel="stylesheet" href="./css/styles.css" type="text/css" >
+</head>
+<body id="main" >
+   
+   <h1>test Objects</h1>
+   
+   <script>
+       
+       var devise1 = {
+	     code : 'EUR',
+		 nom : 'euro',
+		 change : 1
+	  }
+	  devise1.nom="Euro";
+	  devise1["nom"]="Euro2";
+	  var devise1AsJsonString = JSON.stringify(devise1);
+	  console.log(devise1);
+	  console.log(devise1AsJsonString);
+	  var tab2= new Array();
+	  tab2[0]="abc";
+	  tab3=[];
+	  tab3[0]="xyz";
+   </script>
+</body>
+</html>
