@@ -135,6 +135,7 @@ function deleteDevise(){
 			//l'id est "tr_"+idSelected
 			//si cette ligne existe , la supprimer vis à vis de l'élément parent
 			//de l'arbre DOM ...parentNode , .removeChild(...)
+			
 			var trASupprimer = document.querySelector("#tr_"+idSelected);
 			if(trASupprimer!=null){
 				//zoneBodyTableau.removeChild(trASupprimer);
