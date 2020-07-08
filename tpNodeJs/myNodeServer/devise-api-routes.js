@@ -61,4 +61,41 @@ apiRouter.route('/devise-api/public/devise')
 });
 
 
+// http://localhost:8282/devise-api/private/role-admin/devise en mode post
+// avec { "code" : "mxy" , "nom" : "monnaieXy" , "change" : 123 } dans req.body
+apiRouter.route('/devise-api/private/role-admin/devise')
+.post( function(req , res  , next ) {
+	var nouvelleDevise = req.body;
+	console.log("POST,nouvelleDevise="+JSON.stringify(nouvelleDevise));
+	allDevises.push(nouvelleDevise);
+	res.send(nouvelleDevise);
+});
+
+// http://localhost:8282/devise-api/private/role-admin/devise en mode PUT
+// avec { "code" : "USD" , "nom" : "Dollar" , "change" : 1.123 } dans req.body
+apiRouter.route('/devise-api/private/role-admin/devise')
+.put( function(req , res  , next ) {
+	var newValueOfDeviseToUpdate = req.body;
+	console.log("PUT,newValueOfDeviseToUpdate="+JSON.stringify(newValueOfDeviseToUpdate));
+	var deviseToUpdate = findDeviseInArrayByCode(allDevises,newValueOfDeviseToUpdate.code);
+	if(deviseToUpdate!=null){
+		deviseToUpdate.nom = newValueOfDeviseToUpdate.nom;
+		deviseToUpdate.change = newValueOfDeviseToUpdate.change;
+		res.send(deviseToUpdate);
+	}else{
+		res.status(404).json({ error : "no devise to update with code=" + newValueOfDeviseToUpdate.code });
+	}
+	
+});
+
+// http://localhost:8282/devise-api/private/role-admin/devise/EUR en mode DELETE
+apiRouter.route('/devise-api/private/role-admin/devise/:code')
+.delete( function(req , res  , next ) {
+	var codeDevise = req.params.code;
+	console.log("DELETE,codeDevise="+codeDevise);
+	removeDeviseInArrayByCode(allDevises,codeDevise);
+	res.send({ deletedDeviseCode : codeDevise } );
+});
+
+
 exports.apiRouter = apiRouter;

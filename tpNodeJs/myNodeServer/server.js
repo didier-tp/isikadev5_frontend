@@ -1,7 +1,7 @@
 var express = require('express');
 var deviseApiRoutes = require('./devise-api-routes');
-//var produitApiRoutes = require('./produit-api-routes');
-//var bodyParser = require('body-parser');
+var produitApiRoutes = require('./produit-api-routes');
+var bodyParser = require('body-parser');
 var app = express();
 
 /*
@@ -13,11 +13,11 @@ res.header("Access-Control-Allow-Headers",
 next();
 });
 */
-/*
+
 //support parsing of JSON post data
 var jsonParser = bodyParser.json() ;
 app.use(jsonParser);
-*/
+
 //les routes en /html/... seront gérées par express
 //par de simples renvois des fichiers statiques du répertoire "./html"
 app.use('/html', express.static(__dirname+"/html"));
@@ -28,7 +28,7 @@ res.redirect('html/index.html');
 });
 
 app.use(deviseApiRoutes.apiRouter); //delegate REST API routes to apiRouter(s)
-//app.use(produitApiRoutes.apiRouter); 
+app.use(produitApiRoutes.apiRouter); 
 
 app.listen(8282 , function () {
 console.log("http://localhost:8282");
