@@ -9,6 +9,12 @@ function replace_mongoId_byCode(devise){
 	return devise;
 }
 
+function replace_code_byMongoId(devise){
+	devise._id = devise.code;
+	delete devise.code; 
+	return devise;
+}
+
 function replace_mongoId_byCode_inArray(deviseArray){
 	for(i in deviseArray){
 		replace_mongoId_byCode(deviseArray[i]);
@@ -25,7 +31,10 @@ apiRouter.route('/devise-api/public/devise/:code')
 	myGenericMongoClient.genericFindOne('devises',
 										{ '_id' : codeDevise },
 									    function(err,devise){
-										   res.send(replace_mongoId_byCode(devise));
+											if(devise==null)
+											   res.status(404).send({ err : 'not found'});
+											else
+										       res.send(replace_mongoId_byCode(devise));
 									   });
 	
 });
@@ -48,9 +57,10 @@ apiRouter.route('/devise-api/private/role-admin/devise')
 .post( function(req , res  , next ) {
 	var nouvelleDevise = req.body;
 	console.log("POST,nouvelleDevise="+JSON.stringify(nouvelleDevise));
-	nouvelleDevise._id=nouvelleDevise.code;
+	//nouvelleDevise._id=nouvelleDevise.code;
+	var nouvelleDevisePourMongoAvecId = replace_code_byMongoId(nouvelleDevise);
 	myGenericMongoClient.genericInsertOne('devises',
-										nouvelleDevise,
+	                                      nouvelleDevisePourMongoAvecId,
 									     function(err,devise){
 										     res.send(nouvelleDevise);
 									    });
@@ -80,9 +90,12 @@ apiRouter.route('/devise-api/private/role-admin/devise/:code')
 .delete( function(req , res  , next ) {
 	var codeDevise = req.params.code;
 	console.log("DELETE,codeDevise="+codeDevise);
-	myGenericMongoClient.genericRemove('devises',{ _id : codeDevise },
-									     function(err,devise){
-										     res.send({ deletedDeviseCode : codeDevise } );
+	myGenericMongoClient.genericDeleteOneById('devises', codeDevise ,
+									     function(err,isDeleted){
+											 if(!isDeleted)
+											    res.status(404).send({ err : "not found , no delete" } );
+											 else
+										        res.send({ deletedDeviseCode : codeDevise } );
 									    });
 });
 

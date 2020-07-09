@@ -3,6 +3,9 @@
 var zoneBodyTableau;
 var zoneCode;
 var zoneNom;
+var zoneMsg;
+var zoneSearchCode;
+var zoneSearchResult;
 var zoneChange;
 var idSelected; 
 var currentDevise;
@@ -16,6 +19,7 @@ function reInitEmptyDevise(){
 	idSelected=undefined;
 	currentDevise={ code : "" , nom : "" , change : "" };
 	displayDevise(currentDevise);
+	zoneMsg.innerHTML="";
 }
 
 function loadDevisesWithAjax(){
@@ -69,7 +73,11 @@ function deleteOldDeviseWithAjax(oldDevise){
 	// var deleteUrl = URL qui va bien avec le bon code devise a supprimer à la fin
 	var deleteUrl = "../devise-api/private/role-admin/devise/"+oldDevise.code;
 	//***************************************
-	makeAjaxDeleteRequest(deleteUrl , afterDeleteOldDeviseWithAjaxCallback);
+	makeAjaxDeleteRequest(deleteUrl , afterDeleteOldDeviseWithAjaxCallback , displayMessage);
+}
+
+function displayMessage(txt){
+    zoneMsg.innerHTML=txt?txt:"";
 }
 
 function afterDeleteOldDeviseWithAjaxCallback(texteReponse){
@@ -96,6 +104,9 @@ function initialiserPage(){
 	zoneBodyTableau=document.getElementById("bodyTableau");
 	zoneCode=document.getElementById("code");
 	zoneNom=document.getElementById("nom");
+	zoneMsg=document.getElementById("msg");
+	zoneSearchCode=document.getElementById("searchCode");
+	zoneSearchResult=document.getElementById("searchResult");
 	zoneChange=document.getElementById("change");
 	
 	loadDevisesWithAjax();
@@ -249,6 +260,17 @@ function remplacerValeursDeLigneDansTableau(devise){
 		  listeTd[1].innerHTML=devise.nom;
 		  listeTd[2].innerHTML=devise.change;
 	   }
+}
+
+function searchDevise(){
+	var code = zoneSearchCode.value;
+	makeAjaxGetRequest("../devise-api/public/devise/"+code , 
+	                   function(texteReponse){
+		                   zoneSearchResult.innerHTML=texteReponse /* au format json string */
+					   },
+					   function(err){
+						   zoneSearchResult.innerHTML=err /* au format json string */
+					   });
 }
 
 

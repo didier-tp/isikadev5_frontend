@@ -1,19 +1,23 @@
-function makeAjaxGetRequest(url,callback) {
+function makeAjaxGetRequest(url,callback,errCallback) {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-		    callback(xhr.responseText);
+		if (xhr.readyState == 4){
+			if((xhr.status == 200 || xhr.status == 0)) 
+				 callback(xhr.responseText);
+			else errCallback?errCallback(xhr.responseText):null;
 		}
 	};
 	xhr.open("GET", url, true);
 	xhr.send(null);
 }
 
-function makeAjaxDeleteRequest(url,callback) {
+function makeAjaxDeleteRequest(url,callback,errCallback) {
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-		    callback(xhr.responseText);
+		if (xhr.readyState == 4){
+			if((xhr.status == 200 || xhr.status == 0)) 
+				 callback(xhr.responseText);
+			else errCallback?errCallback(xhr.responseText):null;
 		}
 	};
 	xhr.open("DELETE", url, true);

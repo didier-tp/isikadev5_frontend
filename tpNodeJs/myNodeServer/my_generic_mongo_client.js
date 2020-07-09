@@ -87,14 +87,15 @@ var genericRemove = function(collectionName,query,callback_with_err_and_result) 
 
 var genericDeleteOneById = function(collectionName,mongoIdAsString,callback_with_err_and_booleanResult) {
 	executeInMongoDbConnection( function(db) {
-		db.collection(collectionName).deleteOne( { '_id' : new ObjectID(mongoIdAsString)} ,function(err, obj) {
-		if(err!=null) {
-			console.log("genericDeleteOneById error = " + err);
-			callback_with_err_and_booleanResult(err,false);
+		db.collection(collectionName).deleteOne( { '_id' : /*new ObjectID(*/mongoIdAsString } , function(err,deleteWriteOpResultObject) {
+		if(deleteWriteOpResultObject.deletedCount!=1) {
+			console.log("genericDeleteOneById --> no delete");
+			callback_with_err_and_booleanResult("no delete",false);
 			}
-		else 
+		else {
 			console.log(" 1 document deleted");
-		    callback_with_err_and_booleanResult(err,true);
+			callback_with_err_and_booleanResult(null,true);
+		  }
 		});
    });
 };
@@ -105,7 +106,7 @@ var genericFindOne = function(collectionName,query, callback_with_err_and_item) 
 			if(err!=null) {
 				console.log("genericFindById error = " + err);
 		}
-		assert.equal(null, err);
+		//assert.equal(null, err);
 		callback_with_err_and_item(err,item);
 		});
     });

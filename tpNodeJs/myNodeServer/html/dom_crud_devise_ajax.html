@@ -16,6 +16,8 @@
    <input type="button" id="bntUpdate" onclick="updateDevise()" value="Update"></input>
    <input type="button" id="bntDelete" onclick="deleteDevise()" value="Delete"></input> 
    
+   <div id="msg"></div> <!-- for message (error or ...) --> 
+
    <h3>liste des Devises<h3>
    <table border="1" id="tableDevises">
      <thead>
@@ -25,5 +27,9 @@
 	   <!-- <tr id="tr_USD"><td>USD</td><td>Dollar</td><td>1.1</td></tr> -->
 	 </tbody>
    </table>
+   <hr/>
+   searchCode: <input type="text" id="searchCode" /> <br/>
+   <input type="button" value="find by code" onclick="searchDevise()" /> <br/>
+   searchResult : <span id="searchResult"></span>
 </body>
 </html>
