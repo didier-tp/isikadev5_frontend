@@ -1,12 +1,14 @@
+/*d'abord les regles pour tous médias et tailles */
 p { font-size: 1.6em ; }
 label { width:8em; display: inline-block; }
 
 /* avec <tr class="pair ou impair" > ... */
 /*
-.pair {  color : #1ccf1c; }
-.impair { color : #4a3ef7;}
+.pair {  color : red; }
+.impair { color : #f73ee8;}
 */
 /* depuis css3 , pseudo styles :nth-child */
+
 tbody tr:nth-child(2n) {
     color: #1ccf1c;
   }
@@ -18,3 +20,42 @@ tbody tr:nth-child(2n) {
   thead th {
     background-color: yellow;
   }
+
+  /* ensuite nouvelles regles pour taille < 36em de large) */
+@media screen and (max-width :36 em){
+  h1, h2, h3, h4, p {
+    color: #1ccf1c;
+  }
+  h1 {    font-size: 2.4em;  }
+  h2 {    font-size: 2.2em;  }
+  h3 {    font-size: 1.8em;  }
+  h4 {    font-size: 1.2em;  }
+  p , label {    font-size: 1em;  }
+}
+
+/* ensuite nouvelles regles pour taille >= 36 em de large ) */
+@media screen and (min-width : 36em){
+  h1, h2, h3, h4, p {
+    color: red;
+  }
+
+  h1 {   font-size: 2.8em;  }
+  h2 {    font-size: 2.4em;  }
+  h3 {    font-size: 2em;  }
+  h4 {    font-size: 1.6em;  }
+  p , label {    font-size: 1.2em;  }
+}
+
+/* ensuite nouvelles regles pour taille >= 48 em de large ) */
+@media screen and (min-width : 48em){
+  h1, h2, h3, h4, p {
+    color: #4a3ef7;
+  }
+
+  h1 {   font-size: 3.3em;  }
+  h2 {    font-size: 2.8em;  }
+  h3 {    font-size: 2.4em;  }
+  h4 {    font-size: 1.8em;  }
+  p , label {    font-size: 1.4em;  }
+
+}
