@@ -170,12 +170,21 @@ function testValidId(newId){
 	}
 	return res;
 }
+var numNouvelleLigne = 0;
 
 function addDeviseRow(devise){
 	//ajout de nouvelleDevise dans le tableau HTML (partie zoneBodyTableau)
 	var newRow = zoneBodyTableau.insertRow(-1) ;//-1 pour ajout à la fin
 	newRow.setAttribute("id","tr_"+devise.code);
 	//pour acces rapide future suppression et autre
+
+	numNouvelleLigne++;
+	if(numNouvelleLigne%2==0) {
+		newRow.setAttribute("class","pair");
+	}else{
+		newRow.setAttribute("class","impair");
+	}
+
 	var newCell1 = newRow.insertCell(0);
 	
 	newCell1.addEventListener("click" , function () { 
