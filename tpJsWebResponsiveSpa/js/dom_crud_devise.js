@@ -3,114 +3,36 @@
 var zoneBodyTableau;
 var zoneCode;
 var zoneNom;
-var zoneMsg;
-var zoneSearchCode;
-var zoneSearchResult;
 var zoneChange;
 var idSelected; 
 var currentDevise;
-var tabDevises = []; // A synchroniser (via api REST) avec le coté serveur
+var tabDevises = [];
 
-window.onload = function(){
-	initialiserPage();
-}
+var firstInit=true;
+
 
 function reInitEmptyDevise(){
 	idSelected=undefined;
 	currentDevise={ code : "" , nom : "" , change : "" };
 	displayDevise(currentDevise);
-	zoneMsg.innerHTML="";
 }
 
-function loadDevisesWithAjax(){
-	//************ CODE A ANALYSER ET COMPRENDRE EN TP ***************************
-	makeAjaxGetRequest("../devise-api/public/devise" ,  function(texteReponse){
-		tabDevises = JSON.parse(texteReponse /* au format json string */);
-		/* //old simulated values:
-		tabDevises.push({code:'EUR' , nom : 'Euro' , change : 1})
-	    tabDevises.push({code:'USD' , nom : 'Dollar' , change : 1.1})
-		*/
-		for(i=0;i<tabDevises.length;i++){
-			addDeviseRow(tabDevises[i]);
-		}
-	});
-}
-
-function postNewDeviseWithAjax(nouvelleDevise){
-	//************ A FAIRE EN TP ***************************
-	/*makeAjaxPostRequest( .....URL QUI VA BIEN ..... ,
-	                    nouvelleDevise AU FORMAT JSON ,  
-						afterPostNewDeviseWithAjaxCallback);*/
-	//*******************************************************
-	makeAjaxPostRequest("../devise-api/private/role-admin/devise" ,
-		JSON.stringify(nouvelleDevise) ,  
-		afterPostNewDeviseWithAjaxCallback);
-}
-
-function afterPostNewDeviseWithAjaxCallback(texteReponse){
-	    newPostedDevise = JSON.parse(texteReponse /* au format json string */);
-	    //ajout de nouvelleDevise dans le tableau javascript tabDevises
-		tabDevises.push(newPostedDevise);
-		//ajout de nouvelleDevise dans le tableau HTML:
-		addDeviseRow(newPostedDevise);
-		reInitEmptyDevise();
-		mettreEnValeurLigneSelectionnee(null);
-}
-
-function putNewValueOfExistingDeviseWithAjax(deviseToUpdate){
-	makeAjaxPutRequest("../devise-api/private/role-admin/devise" ,
-	                    JSON.stringify(deviseToUpdate) ,  
-						afterPutNewValueOfExistingDeviseWithAjaxCallback);
-}
-
-function afterPutNewValueOfExistingDeviseWithAjaxCallback(texteReponse){
-	    updatedDevise = JSON.parse(texteReponse /* au format json string */);
-	    remplacerValeursDeLigneDansTableau(updatedDevise);
-}
-
-function deleteOldDeviseWithAjax(oldDevise){
-	//************ A FAIRE EN TP ***************************
-	// var deleteUrl = URL qui va bien avec le bon code devise a supprimer à la fin
-	var deleteUrl = "../devise-api/private/role-admin/devise/"+oldDevise.code;
-	//***************************************
-	makeAjaxDeleteRequest(deleteUrl , afterDeleteOldDeviseWithAjaxCallback , displayMessage);
-}
-
-function displayMessage(txt){
-    zoneMsg.innerHTML=txt?txt:"";
-}
-
-function afterDeleteOldDeviseWithAjaxCallback(texteReponse){
-	console.log("delete ajax response:" +  texteReponse);
-	var d = null;
-	for(i=0;i<tabDevises.length;i++){
-			if(tabDevises[i] && tabDevises[i].code == idSelected){
-				d=tabDevises[i]; 
-			    tabDevises.splice(i,1); break;
-			}
-		}
-	if(d!=null){
-			var trASupprimer = document.getElementById("tr_"+idSelected);
-			if(trASupprimer){
-				var parentDeTrDansArbreDom = trASupprimer.parentNode;
-				parentDeTrDansArbreDom.removeChild(trASupprimer);
-			}
-			reInitEmptyDevise();
-		}
-}
-
-function initialiserPage(){
-	console.log("initialiserPage");
+function startDomCrudDevise(){
+	console.log("startDomCrudDevise");
 	zoneBodyTableau=document.getElementById("bodyTableau");
 	zoneCode=document.getElementById("code");
 	zoneNom=document.getElementById("nom");
-	zoneMsg=document.getElementById("msg");
-	zoneSearchCode=document.getElementById("searchCode");
-	zoneSearchResult=document.getElementById("searchResult");
 	zoneChange=document.getElementById("change");
 	
-	loadDevisesWithAjax();
+	if(firstInit==true){
+		tabDevises.push({code:'EUR' , nom : 'Euro' , change : 1})
+		tabDevises.push({code:'USD' , nom : 'Dollar' , change : 1.1})
+		firstInit=false;
+	}
 	
+	for(i=0;i<tabDevises.length;i++){
+			addDeviseRow(tabDevises[i]);
+		}
 	document.getElementById("bntAdd").disabled = false; 
 	document.getElementById("bntUpdate").disabled = true; 
 	document.getElementById("bntDelete").disabled = true; 
@@ -144,8 +66,12 @@ function ajoutDevise(){
 		 change : valChange
 	  } 
 	 if(testValidId(valCode)){ 
-		postNewDeviseWithAjax(nouvelleDevise);
-		//with async afterPostNewDeviseWithAjaxCallback() adding in DOM
+		//ajout de nouvelleDevise dans le tableau javascript tabDevises
+		tabDevises.push(nouvelleDevise);
+		//ajout de nouvelleDevise dans le tableau HTML:
+		addDeviseRow(nouvelleDevise);
+		reInitEmptyDevise();
+		mettreEnValeurLigneSelectionnee(null);
 	 }else{
 		alert("invalid id (duplicated or empty)!!!");
 		zoneCode.focus()
@@ -156,8 +82,7 @@ function updateDevise(){
 	if(idSelected!=null){
 		readDevise(currentDevise);
 		if(currentDevise.code == idSelected){
-			putNewValueOfExistingDeviseWithAjax(currentDevise)
-		    //with async afterPutNewValueOfExistingDeviseWithAjaxCallback
+		    remplacerValeursDeLigneDansTableau(currentDevise);
 		}
 		else{
 			alert("invalid change of id/code for update !!!");
@@ -180,12 +105,23 @@ function deleteDevise(){
 	    var d = null;
 		for(i=0;i<tabDevises.length;i++){
 			if(tabDevises[i] && tabDevises[i].code == idSelected){
-				d=tabDevises[i];  break;
+				d=tabDevises[i]; 
+				//delete tabDevises[i]; break;
+			  //NB: delete ...[i] met à null ...[i]
+			  tabDevises.splice(i,1); break;
+			  //tabDevises.splice(i,2,val1,val2);
+			  //remplace [i] et [i+1] par val1 et val2
+			  //tabDevises.splice(i,1); 
+			  //remplace par rien et donc supprime
 			}
 		}
 		if(d!=null){
-			deleteOldDeviseWithAjax(d);
-			//with async callback afterDeleteOldDeviseWithAjaxCallback
+			var trASupprimer = document.getElementById("tr_"+idSelected);
+			if(trASupprimer){
+				var parentDeTrDansArbreDom = trASupprimer.parentNode;
+				parentDeTrDansArbreDom.removeChild(trASupprimer);
+			}
+			reInitEmptyDevise();
 		}
 	}
 }
@@ -241,10 +177,12 @@ function addDeviseRow(devise){
 	newRow.setAttribute("id","tr_"+devise.code);
 	//pour acces rapide future suppression et autre
 	var newCell1 = newRow.insertCell(0);
+	
 	newCell1.addEventListener("click" , function () { 
 		selectionnerDevise(devise.code);
 		mettreEnValeurLigneSelectionnee(newRow);
 	});	
+	//*************************************
 	newCell1.innerHTML = devise.code;
 	newRow.insertCell(1).innerHTML = devise.nom;
 	newRow.insertCell(2).innerHTML = devise.change;
@@ -261,16 +199,4 @@ function remplacerValeursDeLigneDansTableau(devise){
 		  listeTd[2].innerHTML=devise.change;
 	   }
 }
-
-function searchDevise(){
-	var code = zoneSearchCode.value;
-	makeAjaxGetRequest("../devise-api/public/devise/"+code , 
-	                   function(texteReponse){
-		                   zoneSearchResult.innerHTML=texteReponse /* au format json string */
-					   },
-					   function(jsonErr){
-						   zoneSearchResult.innerHTML=(JSON.parse(jsonErr)).err /* au format json string */
-					   });
-}
-
 
