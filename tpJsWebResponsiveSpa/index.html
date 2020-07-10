@@ -2,6 +2,7 @@
 <head>
 <title>tpJsWebResponsiveSpa</title>
 <link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/layout.css" />
  <link rel="stylesheet" type="text/css" href="css/styles.css" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- for responsive bootstrap on mobile device -->
  <script src="js/my_ajax_util.js"></script>
@@ -51,17 +52,24 @@ window.addEventListener('load', initMainPageAfterLoad);
 </head>
 <body>
 <div class="container">
-   
-<input type="button" value="euroToFranc" id="idP1" /> -
-<input type="button" value="graphique" id="idP2" /> - 
-<input type="button" value="calculatrice" id="idP3" /> - 
-<input type="button" value="domCrudDevises" id="idP4" /> - 
-<input type="button" value="dessin" id="idP5" /> - 
-<input type="button" value="news" id="idP6" /> - 
+	
+<header>
+MY_APP <br/>
+ <nav>  
+	<input type="button" value="euroToFranc" id="idP1" /> -
+	<input type="button" value="graphique" id="idP2" /> - 
+	<input type="button" value="calculatrice" id="idP3" /> - 
+	<input type="button" value="domCrudDevises" id="idP4" /> - 
+	<input type="button" value="dessin" id="idP5" /> - 
+	<input type="button" value="news" id="idP6" /> - 
+  </nav>  
+</header>
 
-<div id="idAlternativeSubPart">...</div>
-
-</div>
-
+<section id="mainContent">
+   <div id="idAlternativeSubPart">...</div>
+</section>
+<footer >
+	<h4>pied de page (liens, mentions légales)</h4>
+</footer>
 </body>
 </html>

@@ -1,1 +1,20 @@
 p { font-size: 1.6em ; }
+label { width:8em; display: inline-block; }
+
+/* avec <tr class="pair ou impair" > ... */
+/*
+.pair {  color : #1ccf1c; }
+.impair { color : #4a3ef7;}
+*/
+/* depuis css3 , pseudo styles :nth-child */
+tbody tr:nth-child(2n) {
+    color: #1ccf1c;
+  }
+  
+  tbody tr:nth-child(2n+1) {
+    color: #4a3ef7;
+  }
+  
+  thead th {
+    background-color: yellow;
+  }
