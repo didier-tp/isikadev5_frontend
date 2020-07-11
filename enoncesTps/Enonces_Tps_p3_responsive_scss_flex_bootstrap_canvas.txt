@@ -55,8 +55,14 @@ Contenu :
    On pourra par exemple s'inspirer le la partie bs4/form-layout.html 
    du référentiel git "https://github.com/didier-mycontrib/test_bootstrap".
 
-6. Via l'api javascript canvas de HTML5, compléter le code de js/dessin.js
+6a. Via l'api javascript canvas de HTML5, compléter le code de js/dessin.js
    de façon à ce l'on puisse dessiner et effacer un dessin dans sp_dessin.html .
+
+6b. (falculatif) améliorer encore sp_dessin.html et js/dessin.js
+   en ajoutant des boutons radios pour choisir typeFig (ligne , rect , cercle)
+               une liste déroulante pour choisir une couleur.
+               un code javascript remanié qui dessine des figures en gérant
+               les événements "mousedown" et mouseup" plutôt que "click"
 
 7. Compléter la partie "news" (sp_news.html , js/news.js) en ajoutant :
    - des appels ajax (en mode GET) pour récupérer le contenu de data/news.json

@@ -15,6 +15,8 @@ function clear_canvas(){
 		//- récupérant un accès au context "2d" (variable locale "ctx")
         //- appelant la méthode ctx.clearRect (x1,y1,x2,y2 )
 		//sachant qu'il existe canvasElement.width et canvasElement.height 
+		var ctx = canvasElement.getContext("2d");
+        ctx.clearRect ( 0 , 0 , canvasElement.width, canvasElement.height );
 		//************************************************
 		x=null; y=null;//reset last coord for next line
 	}
@@ -32,6 +34,11 @@ function log_coords_and_drawLine(event){
 		}
 		//***********A FAIRE EN TP **********************
 		//dessiner une line du point (x,y) vers le point (xC,yC)
+		ctx.beginPath();
+		ctx.moveTo(x,y);//from last x,y
+		ctx.lineTo(xC,yC);//to new xC,yC
+		ctx.closePath();
+		ctx.stroke();
 		//************************************************
 		
 		x=xC; y=yC;//store last coord for next line

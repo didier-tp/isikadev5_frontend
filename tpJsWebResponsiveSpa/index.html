@@ -41,8 +41,11 @@ function initMainPageAfterLoad(){
 	
 	var btnP5 = document.getElementById("idP5");
 	btnP5.addEventListener('click', function(event) {
-		loadJsScript("js/dessin.js",function(){
+		/*loadJsScript("js/dessin.js",function(){
 			loadSubPart("idAlternativeSubPart","sp_dessin.html","startDessin()")
+		});*/
+		loadJsScript("js/dessin_v2.js",function(){
+			loadSubPart("idAlternativeSubPart","sp_dessin_v2.html","startDessin()")
 		});
 	});
 	
