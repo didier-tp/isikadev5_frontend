@@ -29,13 +29,13 @@ apiRouter.route('/devise-api/public/devise/:code')
 .get( function(req , res  , next ) {
 	var codeDevise = req.params.code;
 	myGenericMongoClient.genericFindOne('devises',
-										{ '_id' : codeDevise },
-									    function(err,devise){
-											if(devise==null)
-											   res.status(404).send({ err : 'not found'});
-											else
-										       res.send(replace_mongoId_byCode(devise));
-									   });
+		{ '_id' : codeDevise },
+		  function(err,devise){
+			if(devise==null)
+				   res.status(404).send({ err : 'not found'});
+			else
+				res.send(replace_mongoId_byCode(devise));
+		});
 	
 });
 
@@ -60,14 +60,14 @@ apiRouter.route('/devise-api/private/role-admin/devise')
 	//nouvelleDevise._id=nouvelleDevise.code;
 	var nouvelleDevisePourMongoAvecId = replace_code_byMongoId(nouvelleDevise);
 	myGenericMongoClient.genericInsertOne('devises',
-	                                      nouvelleDevisePourMongoAvecId,
-									     function(err,eId){
-											 if(err==null && eId !=null)
-											   res.send(replace_mongoId_byCode(nouvelleDevise));
-											 else 
-											   res.status(500).send({err : "cannot insert in database" ,
-											                         cause : err});
-									    });
+	    nouvelleDevisePourMongoAvecId,
+		function(err,eId){
+				 if(err==null && eId !=null)
+					  res.send(replace_mongoId_byCode(nouvelleDevise));
+				else 
+			        res.status(500)
+				   .send({err : "cannot insert in database" ,  cause : err});
+		});
 });
 
 // http://localhost:8282/devise-api/private/role-admin/devise en mode PUT
@@ -84,8 +84,8 @@ apiRouter.route('/devise-api/private/role-admin/devise')
 			if(err){
 				res.status(404).json({ err : "no devise to update with code=" + newValueOfDeviseToUpdate.code });
 			}else{
-					res.send(newValueOfDeviseToUpdate);
-			 }
+				res.send(newValueOfDeviseToUpdate);
+		}
 	});	//end of genericUpdateOne()
 });
 
@@ -95,12 +95,12 @@ apiRouter.route('/devise-api/private/role-admin/devise/:code')
 	var codeDevise = req.params.code;
 	console.log("DELETE,codeDevise="+codeDevise);
 	myGenericMongoClient.genericDeleteOneById('devises', codeDevise ,
-									     function(err,isDeleted){
-											 if(!isDeleted)
-											    res.status(404).send({ err : "not found , no delete" } );
-											 else
-										        res.send({ deletedDeviseCode : codeDevise } );
-									    });
+	function(err,isDeleted){
+		 if(!isDeleted)
+		    res.status(404).send({ err : "not found , no delete" } );
+		 else
+	    res.send({ deletedDeviseCode : codeDevise } );
+    });
 });
 
 exports.apiRouter = apiRouter;
