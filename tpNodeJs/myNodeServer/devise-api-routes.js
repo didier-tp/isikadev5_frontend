@@ -61,8 +61,11 @@ apiRouter.route('/devise-api/private/role-admin/devise')
 	var nouvelleDevisePourMongoAvecId = replace_code_byMongoId(nouvelleDevise);
 	myGenericMongoClient.genericInsertOne('devises',
 	                                      nouvelleDevisePourMongoAvecId,
-									     function(err,devise){
-										     res.send(nouvelleDevise);
+									     function(err,eId){
+											 if(err==null && eId !=null)
+											   res.send(replace_mongoId_byCode(nouvelleDevise));
+											 else 
+											   res.status(500).send({err : "cannot insert in database" });
 									    });
 });
 
