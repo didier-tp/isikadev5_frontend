@@ -65,7 +65,8 @@ apiRouter.route('/devise-api/private/role-admin/devise')
 											 if(err==null && eId !=null)
 											   res.send(replace_mongoId_byCode(nouvelleDevise));
 											 else 
-											   res.status(500).send({err : "cannot insert in database" });
+											   res.status(500).send({err : "cannot insert in database" ,
+											                         cause : err});
 									    });
 });
 
@@ -81,7 +82,7 @@ apiRouter.route('/devise-api/private/role-admin/devise')
 	  change : newValueOfDeviseToUpdate.change} ,
 	function(err,devise){
 			if(err){
-				res.status(404).json({ error : "no devise to update with code=" + newValueOfDeviseToUpdate.code });
+				res.status(404).json({ err : "no devise to update with code=" + newValueOfDeviseToUpdate.code });
 			}else{
 					res.send(newValueOfDeviseToUpdate);
 			 }

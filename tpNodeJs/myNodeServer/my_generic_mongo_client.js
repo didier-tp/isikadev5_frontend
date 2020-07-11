@@ -41,8 +41,12 @@ var genericUpdateOne = function(collectionName,id,changes,callback_with_err_and_
 	executeInMongoDbConnection( function(db) {
 		db.collection(collectionName).updateOne( { '_id' : id }, { $set : changes } ,
 			function(err, results) {
+			   //console.log("updateOne results="+JSON.stringify(results));
 				if(err!=null) {
 					console.log("genericUpdateOne error = " + err);
+				}else{
+					if(results.matchedCount == 0)
+					  err = "no existing object with this id was found , no update"
 				}
 			callback_with_err_and_results(err,results);
 			});
