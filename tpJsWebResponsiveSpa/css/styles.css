@@ -1,7 +1,53 @@
+@import "common.css";
+
 /*d'abord les regles pour tous médias et tailles */
+
+.enEvidence {
+  font-weight : bold;
+  color : red ;
+}
+
+
 p { font-size: 1.6em ; }
 
-/*label { width:8em; display: inline-block; }*/
+/* \00aO is unicode for space */
+label:after { content: ":\00a0" } 
+
+/* pour alignement sans bootstrap: label { width:8em; display: inline-block; }*/
+
+
+.small-zoom {
+  transform: scale(0.98);
+  transition: 0.6s;
+  
+}
+
+.small-zoom:hover {
+  transform: scale(1.00);
+  border-width : 4px; 
+  border-style : solid; 
+  border-color : red; 
+}
+
+.c-fieldset {
+  padding:0.5em;
+  margin:0.5em;
+  border-width: 2px; 
+  border-style: solid;
+  border-color: black;
+}
+
+.c-legend {
+  width:inherit; /* Or auto */
+  padding:0 10px; /* To give a bit of padding on the left and right */
+  border-bottom:none;
+}
+
+.tab-pane {
+  border: 2px solid rgb(53, 112, 19) !important;
+  border-radius: 0px 0px 5px 5px !important;
+}
+
 
 /* avec <tr class="pair ou impair" > ... */
 /*
