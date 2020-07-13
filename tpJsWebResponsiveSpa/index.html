@@ -32,8 +32,8 @@ function switchContent(partName){
 			loadSubPart("idAlternativeSubPart","sp_dom_crud_devise.html","startDomCrudDevise()")
 		});	break;
 	case "dessin" :
-		loadJsScript("js/dessin.js", function(){
-			loadSubPart("idAlternativeSubPart","sp_dessin.html","startDessin()")
+		loadJsScript("js/dessin_v2.js", function(){
+			loadSubPart("idAlternativeSubPart","sp_dessin_v2.html","startDessin()")
 		});	break;
 	case "news" :
 		loadJsScript("js/news.js", function(){
@@ -47,7 +47,7 @@ function switchContent(partName){
 <body>
 <div class="container-fluid">
 	
-<header>
+<header class="stickyHeader">
 <!-- <span class="enEvidence">MY_APP</span> <br/> -->
 <nav class="navbar navbar-expand-sm navbar-light bg-faded">
 	<button class="navbar-toggler" type="button" 
@@ -86,10 +86,10 @@ function switchContent(partName){
    </nav> 
 </header>
 
-<section id="mainContent">
+<section id="mainContent" class="mainContentUnderStickyHeader mainContentAboveStickyFooter">
    <div id="idAlternativeSubPart">...</div>
 </section>
-<footer >
+<footer class="stickyFooter">
 	<h4>pied de page (liens, mentions légales)</h4>
 </footer>
 </div>

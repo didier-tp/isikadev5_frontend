@@ -44,6 +44,7 @@ function afficherNews(tabNews){
 			var indexNews = (numRow-1)*2 + (numCol-1);
 			if (indexNews < nbNews){
 				//console.log(indexNews);
+				//noeudCol.innerHTML="xyz";
 				creerEtAttacherCard(tabNews[indexNews],noeudCol);
 			}
 		}
