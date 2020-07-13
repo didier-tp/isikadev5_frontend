@@ -362,6 +362,16 @@ du navigateur
     mais peut être sans utiliser la class "container" au niveau des "tab-pane" .
     Bien régler active et href="#id_tabXy" au niveau des "nav-link"
       	 
-   
+11. faculatif (sp_welcome)
+    Ajouter une nouvelle sous page sp_welcome.html (avec pendant js/welcome.js)
+    dans index.html et effectuer un chargement automatique de cette sous page dès le départ
+    via window.onload .
+    Au sein de cette sous page d'accueil (qui doit être légère pour être rapidement téléchargée)
+    on ne placera pas un carrousel (car images généralement trop lourdes à chrager)   
+    mais on utilisera des effets css avances libres:
+       - micro menu ou micro présentation avec petites animations
+       - petites images ou logos avec bords arrondis
+       - affichages superposés avec z-index et transparence  
+       
 
    
