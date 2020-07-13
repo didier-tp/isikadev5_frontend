@@ -1,12 +1,12 @@
 @import "common.css";
 
-$couleurPref:"red";
+$couleurPref:red;
 
 /*d'abord les regles pour tous médias et tailles */
 
 .enEvidence {
   font-weight : bold;
-  color : $couleurPref ;
+  color : $couleurPref !important;
 }
 
 

@@ -3,7 +3,7 @@
 /*d'abord les regles pour tous médias et tailles */
 .enEvidence {
   font-weight: bold;
-  color: "red";
+  color: red !important;
 }
 
 p {
