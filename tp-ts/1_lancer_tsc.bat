@@ -1,0 +1,6 @@
+REM sans tsconfig.json , ni src / dist , ...
+REM tsc f1.ts > tsc_res.txt
+
+REM avec tsconfig.json , avec src / dist , ...
+REM tsc 
+tsc -w
