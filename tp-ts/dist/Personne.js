@@ -1,4 +1,7 @@
 "use strict";
+//   valeur par defaut 
+// =undefined; accepté ici que si option strictNullChecks": false
+// dans tsconfig.json ou bien si type = string | undefined
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -15,9 +18,10 @@ var __extends = (this && this.__extends) || (function () {
 var Personne = /** @class */ (function () {
     function Personne(prenom, nom) {
         if (prenom === void 0) { prenom = "?"; }
-        if (nom === void 0) { nom = "?"; }
+        if (nom === void 0) { nom = undefined; }
         this.prenom = prenom;
         this.nom = nom;
+        this._age = 0;
         this._age = 0;
         //Object.defineProperty(this, '_age', {enumerable: false});
     }
@@ -60,10 +64,13 @@ var Employe = /** @class */ (function (_super) {
     };
     return Employe;
 }(Personne));
-var p1 = new Personne("jean", "Bon");
+var p1 = new Personne("jean" /*,"Bon"*/);
 p1.age = 30;
 p1.age = -50;
 console.log("age de p1 :" + p1.age);
+var nomP;
+nomP = p1.nom;
+console.log("nomP=" + nomP);
 p1.incrementerAge();
 console.log("age de p1 :" + p1.age);
 console.log("prenom et nom de p1 :" + p1.prenom + " " + p1.nom);

@@ -1,8 +1,12 @@
+//   valeur par defaut 
+// =undefined; accepté ici que si option strictNullChecks": false
+// dans tsconfig.json ou bien si type = string | undefined
+
 class Personne {
-  private _age : number;
+  private _age : number = 0;
 
   constructor(public prenom : string ="?",
-              public nom : string ="?"){
+              public nom : string =undefined){
     this._age = 0;
     //Object.defineProperty(this, '_age', {enumerable: false});
   }
@@ -45,10 +49,15 @@ class Employe extends Personne{
   }
 
 
-var p1 : Personne  = new Personne("jean","Bon");
+var p1 : Personne  = new Personne("jean"/*,"Bon"*/);
 p1.age = 30; 
 p1.age = -50;
 console.log("age de p1 :" + p1.age);
+
+var nomP : string ;
+nomP = p1.nom; 
+console.log("nomP=" + nomP);
+
 p1.incrementerAge();
 console.log("age de p1 :" + p1.age);
 console.log("prenom et nom de p1 :" + p1.prenom + " " + p1.nom);
