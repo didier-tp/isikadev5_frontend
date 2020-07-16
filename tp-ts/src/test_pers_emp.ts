@@ -7,6 +7,24 @@ var p1 : Personne  = new Personne("jean","Bon");
 p1.age = 30; 
 p1.age = -50;
 console.log("age de p1 :" + p1.age);
+
+var obj : object;
+obj = p1;
+// obj.nom; refusé
+
+var nimportquoi : any;
+nimportquoi = p1;
+
+interface Humain {
+    nom : string;
+}
+
+var  h1 : Humain;
+h1=p1;
+h1.nom;
+
+// any , object , interface Humain  , class Personne
+
 p1.incrementerAge();
 console.log("age de p1 :" + p1.age);
 console.log("prenom et nom de p1 :" + p1.prenom + " " + p1.nom);
@@ -22,5 +40,7 @@ var e2 :Employe  = new Employe(999,"axelle","Aire");
 e2.age=30;
 e2.salaire=2000;
 e2.afficherV1();
+
+
 
 

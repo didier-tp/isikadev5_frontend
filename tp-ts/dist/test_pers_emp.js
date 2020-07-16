@@ -6,6 +6,15 @@ var p1 = new Personne_1.Personne("jean", "Bon");
 p1.age = 30;
 p1.age = -50;
 console.log("age de p1 :" + p1.age);
+var obj;
+obj = p1;
+// obj.nom; refusé
+var nimportquoi;
+nimportquoi = p1;
+var h1;
+h1 = p1;
+h1.nom;
+// any , object , interface Humain  , class Personne
 p1.incrementerAge();
 console.log("age de p1 :" + p1.age);
 console.log("prenom et nom de p1 :" + p1.prenom + " " + p1.nom);
