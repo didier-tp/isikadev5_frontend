@@ -22,6 +22,7 @@ this.message="valeurs saisies=" + JSON.stringify(this.login);
  
 
   ngOnInit(): void {
+    
   }
 
 }
