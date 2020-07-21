@@ -1,6 +1,17 @@
-<div [style.background-color]="preferencesService.couleurFondPreferee" class="header">header - {{titre}}
+<div [style.background-color]="couleurFondPrefereeLocale" class="header">header - {{titre | uppercase}}
+    <!--
     <a routerLink="/ngr-welcome">welcome</a> &nbsp;
     <a routerLink="/ngr-basic">basic</a> &nbsp;
     <a routerLink="/ngr-login">login</a> &nbsp;
     <a routerLink="/ngr-conversion">conversion</a> &nbsp;
+    -->
+    <bsu-nav-bar [brandTitle]="titre" 
+                 [menuDefs]="myMenuDefs"></bsu-nav-bar>
 </div>
+
+<!--
+    v1 : <div [style.background-color]="preferencesService.couleurFondPreferee" ...>
+        avec preferencesService comportant couleurFondPreferee public
+    v2 : avec  preferencesService comportant couleurFondPreferee private
+         et copie locale + BehaviorSubject
+-->

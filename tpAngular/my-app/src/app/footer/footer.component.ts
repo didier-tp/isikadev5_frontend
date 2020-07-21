@@ -22,7 +22,19 @@ export class FooterComponent implements OnInit {
     this.changementHumeur.emit({value:this.humeur});
   }
 
-  constructor(public preferencesService : PreferencesService) { }
+  //V1: preferencesService avec sous partie .couleurFondPreferee public et accès direct possible
+  //V2: preferencesService avec behaviorSubject et copie locale de couleurFondPreferee
+  couleurFondPrefereeLocale : string;
+
+  constructor(public preferencesService : PreferencesService) {
+    this.couleurFondPrefereeLocale = "yellow";
+    preferencesService.setNewCouleurFondPreferee(this.couleurFondPrefereeLocale);
+   }
+
+   onChangeCouleurFondPrefereeLocale(){
+    this.preferencesService.setNewCouleurFondPreferee(this.couleurFondPrefereeLocale);
+   }
+ 
 
   ngOnInit(): void {
   }

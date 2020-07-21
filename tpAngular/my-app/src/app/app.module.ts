@@ -15,6 +15,9 @@ import { BsUtilModule } from 'src/bs-util/bs-util.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ConversionComponent } from './conversion/conversion.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminDeviseComponent } from './admin-devise/admin-devise.component';
+import { MyAuthInterceptor } from './common/interceptor/my-auth-interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     TvaComponent,
     LoginComponent,
     WelcomeComponent,
-    ConversionComponent
+    ConversionComponent,
+    AdminDeviseComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,12 @@ import { HttpClientModule } from '@angular/common/http';
     BsUtilModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: MyAuthInterceptor,
+    multi: true
+    }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

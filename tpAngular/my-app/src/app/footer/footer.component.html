@@ -3,7 +3,13 @@
         <option *ngFor="let h of listeHumeurs">{{h}}</option>
 </select>
 &nbsp;  
-        couleurFond:<select [(ngModel)]="preferencesService.couleurFondPreferee" >
+        couleurFond:<select [(ngModel)]="couleurFondPrefereeLocale" 
+                            (change)="onChangeCouleurFondPrefereeLocale()">
                         <option *ngFor="let c of listeCouleurs">{{c}}</option>
         </select> &nbsp;
 </div>
+
+<!--
+    v1 : <select [(ngModel)]="preferencesService.couleurFondPreferee" >
+        avec preferencesService public et sous partie couleurFondPreferee public
+-->

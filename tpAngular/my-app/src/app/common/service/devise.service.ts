@@ -3,14 +3,10 @@ import { Devise } from '../data/devise';
 import { Observable, of } from 'rxjs';
 import {  map} from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { ConvResult } from '../data/ConvResult';
 
 //{"source":"EUR","target":"USD","amount":200,"result":219.78021978021977}
-interface ConvResult{
-   source: string;
-   target : string;
-   amount : number;
-   result : number;
-}
+
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +43,13 @@ export class DeviseService {
                   );
   
   }
+
+
+  public deleteDeviseServerSide(deviseCode):Observable<any>{
+    let deleteUrl : string = "./devise-api/private/role_admin/devise/" + deviseCode ;
+    console.log("deleteUrl= " + deleteUrl );
+    return this.http.delete(deleteUrl );
+    }
 
   //injecter ici http de type HttpClient
   constructor(private http: HttpClient){ }
