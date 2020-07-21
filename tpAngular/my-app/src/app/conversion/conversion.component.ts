@@ -17,15 +17,19 @@ export class ConversionComponent implements OnInit {
   tabDevises : Devise[];
 
   onConvertir(){
-    this.montantConverti=
+    
       this.deviseService.convertir(this.codeDeviseSrc,
                                    this.codeDeviseTarget,
-                                   this.montant);
+                                   this.montant)
+                  //enchainer avec .subscribe(  )
+                  //avec à l'intérieur de subscribe une callback
+                  //qui va (montantConv) => { this.montantConverti = montantConv; }
   }
 
   //injection de dépendance via le constructeur
   constructor(private deviseService : DeviseService) { 
-    this.tabDevises = deviseService.getAllDevises();
+    deviseService.getAllDevises();
+  // this.tabDevises =  dans une callback dans .subscribe
     this.montant=100;
     this.codeDeviseSrc =  this.tabDevises[0].code;
     this.codeDeviseTarget =  this.tabDevises[1].code;

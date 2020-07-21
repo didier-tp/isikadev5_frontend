@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Devise } from '../data/devise';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,14 @@ export class DeviseService {
     new Devise('GBP','Livre',0.9)
   ];
 
-  public getAllDevises() : Devise[]{
-    return this.devises; //version préliminaire (par encore asynchrone)
+  public getAllDevises() : Observable<Devise[]>{
+    return of(this.devises); //version préliminaire (maintenant asynchrone)
   }
 
   public convertir(codeDeviseSrc : string, 
                   codeDeviseTarget : string ,
-                   montant: number) : number {
-                     return 0.8967; //version temporaire (par encore asynchrone)
+                   montant: number) : Observable<number> {
+                     return of(0.8967); //version temporaire (maintenant asynchrone)
   }
 
   constructor() { }
