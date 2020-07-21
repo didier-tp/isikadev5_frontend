@@ -8,9 +8,9 @@ import { Observable, of } from 'rxjs';
 export class DeviseService {
 
   private devises : Devise[] = [
-    new Devise('EUR','Euro',1.0),
-    new Devise('USD','Dollar',1.1),
-    new Devise('GBP','Livre',0.9)
+    new Devise('EUR','euro',1.0),
+    new Devise('USD','dollar',1.1),
+    new Devise('GBP','livre',0.9)
   ];
 
   public getAllDevises() : Observable<Devise[]>{
@@ -20,7 +20,7 @@ export class DeviseService {
   public convertir(codeDeviseSrc : string, 
                   codeDeviseTarget : string ,
                    montant: number) : Observable<number> {
-                     return of(0.8967); //version temporaire (maintenant asynchrone)
+                     return of(0.89675); //version temporaire (maintenant asynchrone)
   }
 
   constructor() { }
