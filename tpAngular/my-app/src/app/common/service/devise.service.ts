@@ -25,7 +25,10 @@ export class DeviseService {
 
   public getAllDevises() : Observable<Devise[]>{
     //return of(this.devises); //version préliminaire (maintenant asynchrone)
-      let baseUrl = "http://localhost:8282/devise-api/public/devise";
+      //let baseUrl = "http://localhost:8282/devise-api/public/devise";
+      let baseUrl ="./devise-api/public/devise"; //url relative si ng serve lancé 
+                                                //avec option --proxy-config proxy.conf.json
+                                                //ou config equivalente en production
       let wsUrl = `${baseUrl}`;
       return this.http.get<Devise[]>(wsUrl);
     }
@@ -34,7 +37,8 @@ export class DeviseService {
                   codeDeviseTarget : string ,
                    montant: number) : Observable<number> {
                     //return of(0.89675); //version temporaire (maintenant asynchrone)
-      let baseUrl = "http://localhost:8282/devise-api/public/convert";
+      //let baseUrl = "http://localhost:8282/devise-api/public/convert";
+      let baseUrl = "./devise-api/public/convert";
       let wsUrl = `${baseUrl}?source=${codeDeviseSrc}&target=${codeDeviseTarget}&amount=${montant}`;
       console.log("wsUrl="+wsUrl);
       return this.http.get<ConvResult>(wsUrl)
