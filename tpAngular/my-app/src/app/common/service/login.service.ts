@@ -15,7 +15,7 @@ export class LoginService {
   constructor(private http : HttpClient) { }
 
   public postLogin(login: Login): Observable<LoginResponse>{
-     let url="login-api/public/auth"; //sera préfixé par http://localhost:8282
+     let url="./login-api/public/auth"; //sera préfixé par http://localhost:8282
      //via l'option --proxy-config proxy.conf.json de ng serve
      //NB: map() transforme et tap() declenche un traitement en plus sans transformer
      return this.http.post<LoginResponse>(url,login, {headers: this._headers} )
